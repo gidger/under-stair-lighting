@@ -21,13 +21,13 @@ const int button_bottom = 8;
 const int button_top = 5;
 
 // Define sensor pins.
-const int sensor_bottom_trig = 46;
-const int sensor_bottom_echo = 48;
+const int sensor_bottom_trig = 3;
+const int sensor_bottom_echo = 2;
 const int sensor_top_trig = 50;
 const int sensor_top_echo = 52;
 
 // Define time all stairs will be lit.
-const int lightup_time = 2000;
+const int lightup_time = 4500;
 
 // Define time between individual stair lightups.
 const int interlight_delay = 200;
@@ -65,7 +65,7 @@ void setup() {
  
 void loop() {
 
-  /*
+  
   long duration_bot, distance_bot, duration_top, distance_top;
   digitalWrite(sensor_bottom_trig, LOW);  // Added this line
   delayMicroseconds(2); // Added this line
@@ -74,7 +74,7 @@ void loop() {
   digitalWrite(sensor_bottom_trig, LOW);
   duration_bot = pulseIn(sensor_bottom_echo, HIGH);
   distance_bot = (duration_bot/2) / 29.1;
-
+  /*
   digitalWrite(sensor_top_trig, LOW);  // Added this line
   delayMicroseconds(2); // Added this line
   digitalWrite(sensor_top_trig, HIGH);
@@ -84,19 +84,20 @@ void loop() {
   distance_top = (duration_top/2) / 29.1;
   */
 
-/*
-  if (distance_bot < 120 || distance_bot > 150){
+
+  if (distance_bot < 105){
     lights_on_up();
     delay(lightup_time);
     lights_off_up();
-    delay(lightup_time);
   }
+  /*
   if (distance_top < 75 || distance_top > 100){
     lights_on_down();
     delay(lightup_time);
     lights_off_down();
   }
-*/
+  */
+
 
   int button_bottom_read = digitalRead(button_bottom);  
     
@@ -108,11 +109,11 @@ void loop() {
 
   int button_top_read = digitalRead(button_top);
   
-  if (button_top_read == HIGH){
+  /*if (button_top_read == HIGH){
     lights_on_down();
     delay(lightup_time);
     lights_off_down();
-  }
+  }*/
   
   delay(25);
 }
