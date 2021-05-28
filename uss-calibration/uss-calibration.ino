@@ -10,10 +10,10 @@ Original code improvements to the Ping sketch sourced from Trollmaker.com
 Some code and wiring inspired by http://en.wikiversity.org/wiki/User:Dstaub/robotcar
 */
 
-#define trigPin_bot 5
-#define echoPin_bot 4
-#define trigPin_top 3
-#define echoPin_top 2
+#define trigPin_bot 3
+#define echoPin_bot 2
+#define trigPin_top 5
+#define echoPin_top 4
 #define led 11
 int duration_top = 0;
 int distance_top = 0;
@@ -79,10 +79,13 @@ void loop() {
     Serial.println(" cm - TOP");
   }
 
-  if (distance_top < 110){
+  /*
+
+  if (distance_top < 60){
     wait_func();
   }
-  
+
+  */
   delay(100); //CHANGE TO 100 FOR MEASURING
 }
 
