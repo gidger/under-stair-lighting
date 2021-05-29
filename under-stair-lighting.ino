@@ -16,7 +16,6 @@ const int light_N = 49;
 const int light_O = 51;
 const int light_P = 53; // Top stair.
 
-
 // Define sensor pins.
 const int sensor_bottom_trig = 3;
 const int sensor_bottom_echo = 2;
@@ -24,13 +23,17 @@ const int sensor_top_trig = 5;
 const int sensor_top_echo = 4;
 
 // Define time all stairs will be lit.
-const int lightup_time = 5800;
+const int lightup_time = 6800;
 
 // Define time between individual stair lightups.
 const int interlight_delay = 150;
+
+// Define cooldown time before the next trigger is allowed.
+const int cooldown_time = 1500;
  
 void setup() {
     Serial.begin(9600);
+    
     pinMode(light_A, OUTPUT);
     pinMode(light_B, OUTPUT);
     pinMode(light_C, OUTPUT);
@@ -47,8 +50,6 @@ void setup() {
     pinMode(light_N, OUTPUT);
     pinMode(light_O, OUTPUT);
     pinMode(light_P, OUTPUT);
-
-    pinMode(LED_BUILTIN, OUTPUT);
     
     pinMode(sensor_bottom_trig, OUTPUT);
     pinMode(sensor_top_trig, OUTPUT);
@@ -59,34 +60,40 @@ void setup() {
  
 void loop() {
 
-  
+  // Define vars for response time and calculated distance for top and bottom ultrasonic sensors.
   long duration_bot, distance_bot, duration_top, distance_top;
-  digitalWrite(sensor_bottom_trig, LOW);  // Added this line
-  delayMicroseconds(2); // Added this line
+  
+  // Get distances from top and bottom sensors.
+  digitalWrite(sensor_bottom_trig, LOW);
+  delayMicroseconds(2);
   digitalWrite(sensor_bottom_trig, HIGH);
-  delayMicroseconds(10); // Added this line
+  delayMicroseconds(10);
   digitalWrite(sensor_bottom_trig, LOW);
   duration_bot = pulseIn(sensor_bottom_echo, HIGH);
   distance_bot = (duration_bot/2) / 29.1;
   
-  digitalWrite(sensor_top_trig, LOW);  // Added this line
-  delayMicroseconds(2); // Added this line
+  digitalWrite(sensor_top_trig, LOW);
+  delayMicroseconds(2);
   digitalWrite(sensor_top_trig, HIGH);
-  delayMicroseconds(10); // Added this line
+  delayMicroseconds(10);
   digitalWrite(sensor_top_trig, LOW);
   duration_top = pulseIn(sensor_top_echo, HIGH);
   distance_top = (duration_top/2) / 29.1;
-  
+
+  // If bottom distance is less than calibrated threshold.
   if (distance_bot < 105){
     lights_on_up();
     delay(lightup_time);
     lights_off_up();
+    delay(cooldown_time);
   }
-  
+
+  // If top distance is less than calibrated threshold.
   if (distance_top < 60){
     lights_on_down();
     delay(lightup_time);
     lights_off_down();
+    delay(cooldown_time);
   }
   delay(25);
 }
