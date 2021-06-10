@@ -6,9 +6,9 @@ Check out the accompanying blog post for this code [here](https://gidge.dev/stai
 
 ## Examples
 
-![Example Up](https://gidge.dev/assets/posts/stair-lighting/build/bottom-up.gif)
+![Example Up](https://github.com/gidger/under-stair-lighting/blob/97d05713b8842876cc279ee3c0c744754c52273f/examples/bottom-up.gif)
 
-![Example Down](https://gidge.dev/assets/posts/stair-lighting/build/bottom-down.gif)
+![Example Down](https://github.com/gidger/under-stair-lighting/blob/97d05713b8842876cc279ee3c0c744754c52273f/examples/bottom-down.gif)
 
 ## Parts to Modify for Your Own Buid
 - Pin definintion: you'll need to match the number of pins to the number of stairs/lights you have.
