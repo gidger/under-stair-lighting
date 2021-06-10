@@ -16,16 +16,16 @@ const int light_N = 49;
 const int light_O = 51;
 const int light_P = 53; // Top stair.
 
-// Define sensor pins.
+// Define ultrasonic sensor pins.
 const int sensor_bottom_trig = 3;
 const int sensor_bottom_echo = 2;
 const int sensor_top_trig = 5;
 const int sensor_top_echo = 4;
 
-// Define time all stairs will be lit.
+// Define time all stairs will be illuminated after the on animation.
 const int lightup_time = 6800;
 
-// Define time between individual stair lightups.
+// Define delay between concurrent stairs lighting up.
 const int interlight_delay = 150;
 
 // Define cooldown time before the next trigger is allowed.
@@ -33,7 +33,8 @@ const int cooldown_time = 1500;
  
 void setup() {
     Serial.begin(9600);
-    
+
+    // Output pins.
     pinMode(light_A, OUTPUT);
     pinMode(light_B, OUTPUT);
     pinMode(light_C, OUTPUT);
@@ -50,20 +51,19 @@ void setup() {
     pinMode(light_N, OUTPUT);
     pinMode(light_O, OUTPUT);
     pinMode(light_P, OUTPUT);
-    
+
+    // Ultrasonic sensor pins.
     pinMode(sensor_bottom_trig, OUTPUT);
-    pinMode(sensor_top_trig, OUTPUT);
     pinMode(sensor_bottom_echo, INPUT);
+    pinMode(sensor_top_trig, OUTPUT);
     pinMode(sensor_top_echo, INPUT);
 }
  
- 
 void loop() {
-
   // Define vars for response time and calculated distance for top and bottom ultrasonic sensors.
   long duration_bot, distance_bot, duration_top, distance_top;
   
-  // Get distances from top and bottom sensors.
+  // Get distance from bottom sensor.
   digitalWrite(sensor_bottom_trig, LOW);
   delayMicroseconds(2);
   digitalWrite(sensor_bottom_trig, HIGH);
@@ -71,7 +71,8 @@ void loop() {
   digitalWrite(sensor_bottom_trig, LOW);
   duration_bot = pulseIn(sensor_bottom_echo, HIGH);
   distance_bot = (duration_bot/2) / 29.1;
-  
+
+  // Get distance from top sensor.
   digitalWrite(sensor_top_trig, LOW);
   delayMicroseconds(2);
   digitalWrite(sensor_top_trig, HIGH);
@@ -81,24 +82,27 @@ void loop() {
   distance_top = (duration_top/2) / 29.1;
 
   // If bottom distance is less than calibrated threshold.
+  // Note: uss-calibration.ino bundled with this code's repo has code to determine the threshold.
   if (distance_bot < 105){
-    lights_on_up();
-    delay(lightup_time);
-    lights_off_up();
-    delay(cooldown_time);
+    lights_on_up();         // Upwards on animation.
+    delay(lightup_time);    // All lights on.
+    lights_off_up();        // Upwards off animation.
+    delay(cooldown_time);   // All lights off.
   }
 
   // If top distance is less than calibrated threshold.
   if (distance_top < 60){
-    lights_on_down();
-    delay(lightup_time);
-    lights_off_down();
-    delay(cooldown_time);
+    lights_on_down();       // Downwards on animation.
+    delay(lightup_time);    // All lights on.
+    lights_off_down();      // Downwards off animation.
+    delay(cooldown_time);   // All lights off.
   }
   delay(25);
 }
 
 void lights_on_up() {
+  // Upwards on animation.
+  // Turn on each light from bottom to top, delay for a time between lights.
   digitalWrite(light_A, HIGH);
   delay(interlight_delay);
   digitalWrite(light_B, HIGH);
@@ -130,10 +134,11 @@ void lights_on_up() {
   digitalWrite(light_O, HIGH);
   delay(interlight_delay);
   digitalWrite(light_P, HIGH);
-  delay(interlight_delay);
 }
 
 void lights_on_down() {
+  // Upwards off animation.
+  // Turn off each light from bottom to top, delay for a time between lights.
   digitalWrite(light_P, HIGH);
   delay(interlight_delay);
   digitalWrite(light_O, HIGH);
@@ -165,10 +170,11 @@ void lights_on_down() {
   digitalWrite(light_B, HIGH);
   delay(interlight_delay);
   digitalWrite(light_A, HIGH);
-  delay(interlight_delay);
 }
 
 void lights_off_up() {
+  // Downwards on animation.
+  // Turn on each light from top to bottom, delay for a time between lights.
   digitalWrite(light_A, LOW);
   delay(interlight_delay);
   digitalWrite(light_B, LOW);
@@ -200,11 +206,12 @@ void lights_off_up() {
   digitalWrite(light_O, LOW);
   delay(interlight_delay);
   digitalWrite(light_P, LOW);
-  delay(interlight_delay);
 }
 
 
 void lights_off_down() {
+  // Downwards off animation.
+  // Turn off each light from top to bottom, delay for a time between lights.
   digitalWrite(light_P, LOW);
   delay(interlight_delay);
   digitalWrite(light_O, LOW);
@@ -236,5 +243,4 @@ void lights_off_down() {
   digitalWrite(light_B, LOW);
   delay(interlight_delay);
   digitalWrite(light_A, LOW);
-  delay(interlight_delay);
 }
