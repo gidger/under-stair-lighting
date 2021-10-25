@@ -1,7 +1,11 @@
 # Arduino Powered Cascading LED Stair Lights
 Arduino controlled cascading LED under stair lights. Makes use of ultrasonic sensors to detect if someone is walking by the top/bottom of a staircase. Cascades the lights on and off in the appropriate direction.
 
-Check out the accompanying blog post for this code [here](https://gidge.dev/stair%20lights/stair-lighting/) for more info and examples.
+Additional functionality to act as a real-time bass visualizer.
+
+Check out the accompanying blog posts for this code for more info and examples:
+[Part 1: Basic Cascade Functionality](https://gidge.dev/stair%20lights/stair-lighting/)
+[Part 2: Real-Time Bass Visualization](https://gidge.dev/stair%20lights/stair-lighting-pt2/)
 
 
 ## Examples
@@ -9,6 +13,9 @@ Check out the accompanying blog post for this code [here](https://gidge.dev/stai
 ![Example Up](https://github.com/gidger/under-stair-lighting/blob/97d05713b8842876cc279ee3c0c744754c52273f/examples/bottom-up.gif)
 
 ![Example Down](https://github.com/gidger/under-stair-lighting/blob/97d05713b8842876cc279ee3c0c744754c52273f/examples/bottom-down.gif)
+
+![<img src="https://github.com/gidger/under-stair-lighting/blob/d4d0b198ada6a9371a6818912574b9392130d69f/examples/youtube-thumbnail.jpg">](https://www.youtube.com/watch?v=AO4oNaiYNIw)
+
 
 ## Parts to Modify for Your Own Buid
 - Pin definintion: you'll need to match the number of pins to the number of stairs/lights you have.
