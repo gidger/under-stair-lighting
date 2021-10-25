@@ -14,7 +14,7 @@ Check out the accompanying blog posts for this code for more info and examples:
 
 ![Example Down](https://github.com/gidger/under-stair-lighting/blob/97d05713b8842876cc279ee3c0c744754c52273f/examples/bottom-down.gif)
 
-![<img src="https://github.com/gidger/under-stair-lighting/blob/d4d0b198ada6a9371a6818912574b9392130d69f/examples/youtube-thumbnail.jpg">](https://www.youtube.com/watch?v=AO4oNaiYNIw)
+[<img src="https://github.com/gidger/under-stair-lighting/blob/d4d0b198ada6a9371a6818912574b9392130d69f/examples/youtube-thumbnail.jpg">](https://www.youtube.com/watch?v=AO4oNaiYNIw)
 
 
 ## Parts to Modify for Your Own Buid
