@@ -29,7 +29,7 @@ const int interlight_delay = 150;
 
 // Define threshold distances for top and bottom sensors.
 const int threshold_distance_top = 60;
-const int threshold_distance_bot = 105;
+const int threshold_distance_bot = 95;
 
 // Define cooldown time before the next trigger is allowed.
 const int cooldown_time = 1500;
@@ -155,7 +155,7 @@ void standard_mode(){
   
   // If top distance is less than calibrated threshold.
   // Note: uss-calibration.ino bundled with this code's repo has code to determine the threshold.
-  if (distance_top < threshold_distance_top) {
+  if (distance_top < threshold_distance_top ) {
     animation_direction = "down";
   }
 
@@ -334,7 +334,7 @@ void lights_flash(int flash_count){
   for(int i = 0; i<flash_count; i++){
     
     // Turn lights on.
-    for(int j = 0; i<num_lights; j++){
+    for(int j = 0; j<num_lights; j++){
       digitalWrite(led_pins[j], HIGH);
     }
     smart_pause_milli(250); // Pause for 0.25s with lights on.
